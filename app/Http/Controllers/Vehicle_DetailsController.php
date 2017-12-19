@@ -23,12 +23,12 @@ class Vehicle_DetailsController extends Controller
 
     public function getVehicle_details()
     {
-    	$query = DB:: table('rb_main.vehicle_documents')->get();
+    	$query = DB:: table('vehicle_documents')->get();
     	return View("Vehicle_details",['query'=>$query]);
     }
      public function get_Vehicle_details()
     {
-    	$query = DB:: table('rb_main.vehicle_documents')->get();
+    	$query = DB:: table('vehicle_documents')->get();
     	return View("table",['query'=>$query]);
     }
 }
