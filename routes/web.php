@@ -16,4 +16,8 @@ Route::get('/', function () {
 
 Route::get('vehicle-details','Vehicle_DetailsController@getVehicle_details');
 Route::get('table-details','Vehicle_DetailsController@get_Vehicle_details');
-?>
+Route::get('log-in','Vehicle_DetailsController@login');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
