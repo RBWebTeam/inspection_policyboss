@@ -49,7 +49,7 @@ try {
          return response()->json(array('status' =>0,'message'=>"success",'result'=>$result));
         }
          }else{
-         	echo "Unable to run API";
+         	return response()->json(array('status' =>1,'message'=>"Official hours are over.Try between 9 to 7",'result'=>''));
          } 
         
         
