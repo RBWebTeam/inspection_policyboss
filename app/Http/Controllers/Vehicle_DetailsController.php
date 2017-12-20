@@ -19,7 +19,11 @@ class Vehicle_DetailsController extends Controller
 	{
 	return View('table');
 	}
+    public function login()
+    {
 
+        return view('login');
+    }
 
     public function getVehicle_details()
     {
