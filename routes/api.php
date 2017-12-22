@@ -21,3 +21,5 @@ Route::post('vehicle-registration','ApiController@vehicle_registration');
 Route::post('vehicle-documents','ApiController@vehicle_documents');
 Route::post('vehicle-video-documents','ApiController@vehicle_video_documents');
 Route::post('vehicle-inspection-details','ApiController@vehicle_inspection_details');
+Route::post('vehicle-inspection-otp','ApiController@vehicle_inspection_otp');
+Route::post('vehicle-inspection-verify-otp','ApiController@vehicle_inspection_verify_otp');

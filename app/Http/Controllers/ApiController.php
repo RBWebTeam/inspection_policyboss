@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
+use DB;
+use Response;
+class ApiController extends CallApiController
 
-class ApiController extends Controller
 {
+  public static $service_url_static = "http://services.rupeeboss.com/";
     public function vehicle_registration(Request $req){
       	
 try {
@@ -113,7 +117,7 @@ try {
     {
 
        $file=$req->file('video');
-        print_r($file);exit();
+        // print_r($file);exit();
        if($file == null){
             throw new \Exception("Upload Video ", 1);
           }
@@ -267,5 +271,116 @@ try {
      }
      return response()->json(array('status' =>$status,'message'=>$msg,"front_rear_id"=>$query,"left_id"=>$query1,"right_id"=>$query2,"tyre_id"=>$query3,"glass_id"=>$query4,));
    }
+  
+
+  // public function vehicle_verification(){
+  //   return view('vehicle-verification');
+  // }
+
+   public function vehicle_inspection_otp(Request $req){
+      $status=0;
+      $msg="success";
+      try {
+        $otp=123456;
+      // $otp = mt_rand(100000, 999999);
+            Session::put('temp_contact', $req['mobile']);
+            print_r(Session::get('temp_contact'));exit();
+            $post_data='{"mobNo":"'.$req['mobile'].'","msgData":"your otp is '.$otp.' - RupeeBoss.com",
+                        "source":"WEB"}';
+            // $url = "http://beta.services.rupeeboss.com/LoginDtls.svc/xmlservice/sendSMS";
+            // $url = $this::$service_url_static."LoginDtls.svc/xmlservice/sendSMS";
+            // $result=$this->call_json_data_api($url,$post_data);
+            // $http_result=$result['http_result'];
+            // $error=$result['error'];
+            // $obj = json_decode($http_result);
+            // print_r($post_data);exit();
+            // statusId response 0 for success, 1 for failure
+
+            $query=DB::table('vehicle_inspection_otp')
+            ->insertGetId(['mobile_no'=>$req->mobile,
+              'otp'=>$otp,
+              'created_at'=>date("Y-m-d H:i:s"),
+              'updated_at'=>date("Y-m-d H:i:s")]);
+            
+            if ($query) {
+              return response()->json(array('status' =>0,'message'=>"success"));
+            }
+      } catch (Exception $ee) {
+        return response()->json(array('status' =>1,'message'=>$ee->getMessage()));
+      }
+      
+    }
+    
+
+
+   
+
+   public function vehicle_inspection_verify_otp(Request $req){
+    $phone = Session::get('temp_contact');
+   
+    $express_otp=$req->verify_otp;
+     // print_r($express_otp);exit();
+    
+    
+        
+          Session::put('contact',$phone);
+          if(Session::get('temp_contact'))
+          {
+          return Response::json(array(
+                            'status' => "success",
+                        ));
+           }else{
+          return Response::json(array(
+                            'status' => "fail",
+                        ));
+        }
+      }
+
+ //       public function vehicle_send_otp(Request $req){
+ //    // print_r($req->mobile);exit();
+ //    $otp=123456;
+ //    // $otp = mt_rand(100000, 999999);
+ //    Session::put('temp_contact', $req['mobile']);
+ //    $post_data='{"mobNo":"'.$req['mobile'].'","msgData":"your otp is '.$otp.' - RupeeBoss.com",
+ //                "source":"WEB"}';
+ //            // $url = "http://beta.services.rupeeboss.com/LoginDtls.svc/xmlservice/sendSMS";
+ //               $url = $this::$service_url_static."LoginDtls.svc/xmlservice/sendSMS";
+ //            $result=$this->call_json_data_api($url,$post_data);
+ //            $http_result=$result['http_result'];
+ //            $error=$result['error'];
+ //            $obj = json_decode($http_result);
+ //            // statusId response 0 for success, 1 for failure
+            
+ //            if($obj->{'statusId'}==0){
+ //                return Response::json(array(
+ //                            'data' => true,
+ //                        ));
+ //            }else{
+ //                return Response::json(array(
+ //                            'data' => false,
+ //                        ));
+ //            }
+        
+ //        }
+
+ //    public function vehicle_verify_otp(Request $req){
+ //    $phone = Session::get('temp_contact');
+ //    $express_otp=$req->verify_otp;
+ //    //print_r($express_otp);
+ //    //print_r($phone);
+        
+ //          Session::put('contact',$phone);
+ //          if(Session::get('temp_contact'))
+ //          {
+ //          return Response::json(array(
+ //                            'data' => "true",
+ //                        ));
+ //           }else{
+ //          return Response::json(array(
+ //                            'data' => "false",
+ //                        ));
+ //        }
+ // }
+        
 
 }
