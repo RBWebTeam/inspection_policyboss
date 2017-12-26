@@ -30,9 +30,5 @@ class Vehicle_DetailsController extends Controller
     	$query = DB:: table('vehicle_documents')->get();
     	return View("Vehicle_details",['query'=>$query]);
     }
-     public function get_Vehicle_details()
-    {
-    	$query = DB:: table('vehicle_documents')->get();
-    	return View("table",['query'=>$query]);
-    }
+    
 }
