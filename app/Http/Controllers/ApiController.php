@@ -273,9 +273,9 @@ try {
    }
   
 
-  // public function vehicle_verification(){
-  //   return view('vehicle-verification');
-  // }
+  public function vehicle_verification(){
+    return view('vehicle-verification');
+  }
 
    public function vehicle_inspection_otp(Request $req){
       $status=0;
@@ -284,7 +284,7 @@ try {
         $otp=123456;
       // $otp = mt_rand(100000, 999999);
             Session::put('temp_contact', $req['mobile']);
-            // print_r(Session::get('temp_contact'));exit();
+            print_r(Session::get('temp_contact'));exit();
             $post_data='{"mobNo":"'.$req['mobile'].'","msgData":"your otp is '.$otp.' - RupeeBoss.com",
                         "source":"WEB"}';
             // $url = "http://beta.services.rupeeboss.com/LoginDtls.svc/xmlservice/sendSMS";
