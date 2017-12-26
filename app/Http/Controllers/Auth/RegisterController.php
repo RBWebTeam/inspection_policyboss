@@ -29,7 +29,7 @@ class RegisterController extends Controller
      */
     protected function redirectTo()
     {
-      return  ('vehicle-details');
+      return  ('login');
     }
 
     /**
