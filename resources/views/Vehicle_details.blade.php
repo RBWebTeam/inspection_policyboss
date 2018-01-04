@@ -1,4 +1,5 @@
-
+@extends('layouts.app')
+@section('content')
 <!DOCTYPE html>
 <link class="cssdeck" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" class="cssdeck">
@@ -19,6 +20,7 @@
   padding: 9px 17px 8px 15px;
   border: 1px solid #ddd;
   margin-bottom: 12px;
+
 }
 </style>
 <script type="text/javascript">
@@ -44,7 +46,7 @@
 <div id="vehicledashboard">
     <div style="padding-left: 20px;">
     	<b style="font-size:20px;">Search:</b>
-    	<input type="text" id="myInput" onkeyup="Search()" placeholder="Search for Vehicle No" title="Type in a Vehicle No"> 
+    	<input type="text" id="myInput" onkeyup="Search()" placeholder="Search for Vehicle No" title="Type in a Vehicle No" style="height: 39px; width: 30%;"> 
     </div>
 	<table class="table table-bordered" id="myTable">
     <thead>
@@ -60,7 +62,7 @@
           <td align="left" style="padding-left: 4px"  width="3%"><?php echo $val->id;?></td>
           <td align="left" style="padding-left: 4px"  width="10%"><?php echo $val->vehicle_no;?></td>
           <td align="left" style="padding-left: 4px"  width="10%"><?php echo $val->document_name;?></td>
-          <td align="left" style="padding-left: 4px"  width="5%"><a class="btn btn-primary" href="<?php echo $val->doc_path;?>">View</a></td>
+          <td align="left" style="padding-left: 4px"  width="5%"><a class="btn btn-primary" href="http://inspection.policyboss.com/<?php echo $val->doc_path;?>">View</a></td>
        </tr>
      @endforeach
      </tbody> 
@@ -68,3 +70,4 @@
 </div>
 </body>
 </html>
+@endsection
